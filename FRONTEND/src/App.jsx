@@ -1,7 +1,6 @@
 import Signup from "./page/auth/Signup";
 import Signin from "./page/auth/Signin";
 import AddProduct from "./page/product/AddProduct";
-import Product from "./page/product/Product";
 import ProductList from "./page/product/ProductList";
 import { Routes, Route } from "react-router-dom";
 import ProtectedRoutes from "./providers/protectedRoutes";
@@ -16,11 +15,14 @@ function App() {
 
   const [socket, setSocket] = useState(null);
   useEffect(() => {
-    const connectedSocket = io("http://localhost:5555", {
-      //connecting with database
-      transports: ["websocket"],
-      withCredentials: true, // Kredi bilgileriyle birlikte avoiding cors
-    });
+    const connectedSocket = io(
+      "https://auction-app-backend-i9xh.onrender.com",
+      {
+        //connecting with database
+        transports: ["websocket"],
+        withCredentials: true, // Kredi bilgileriyle birlikte avoiding cors
+      }
+    );
     connectedSocket.on("connect", () => {
       setSocket(connectedSocket);
     });
